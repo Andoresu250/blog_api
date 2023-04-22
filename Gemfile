@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.8.0'
 gem 'devise-jwt', '~> 0.10.0'
 gem 'health_check'
+gem 'pagy'
 
 gem 'rack-cors'
 
