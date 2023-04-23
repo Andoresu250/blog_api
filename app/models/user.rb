@@ -8,7 +8,12 @@ class User < ApplicationRecord
 
   attr_accessor :jwt
 
+  has_many :friendships, class_name: 'Friendship'
+  has_many :friends, through: :friendships
+
   validates :email, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, presence: true
+
+  scope :search, -> (q) { where("LOWER(email) LIKE :q OR TRIM(REGEXP_REPLACE(LOWER(CONCAT(COALESCE(first_name, ''), ' ', COALESCE(last_name, ''))), '\s+', ' ', 'g')) LIKE :q", {q: "%#{q.downcase.squeeze(" ")}%"}) }
 
 end
